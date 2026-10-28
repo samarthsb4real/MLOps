@@ -1,0 +1,11 @@
+{
+  "model_name": "PopularityRecommender",
+  "version": "1.0.0",
+  "is_fitted": true,
+  "num_movies_scored": 8238,
+  "global_mean_rating": 3.5137470249900833,
+  "min_ratings_threshold": 20,
+  "top_movie_title": "Shawshank Redemption, The (1994)",
+  "run_id": "cf0d95a957924236aff7c570a57d562b",
+  "experiment_id": "1"
+}

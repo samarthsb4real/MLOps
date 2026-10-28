@@ -1,0 +1,108 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python -m src.pipeline.prepare
+    deps:
+    - path: ml-latest-small/movies.csv
+      hash: md5
+      md5: ed94fab72b62442ef8150d9446e000d6
+      size: 494431
+    - path: ml-latest-small/ratings.csv
+      hash: md5
+      md5: 325a6f09399d1c45671f187505e1a100
+      size: 2483723
+    - path: src/data/loader.py
+      hash: md5
+      md5: 1b737b0083423526893b971b92da751c
+      size: 4053
+    - path: src/data/split.py
+      hash: md5
+      md5: 18211e533b38a4fa4bd5011fa26827bf
+      size: 2484
+    - path: src/data/validator.py
+      hash: md5
+      md5: e0390f1d92fd2d4c35bbcfaacd3de4cc
+      size: 4120
+    - path: src/pipeline/prepare.py
+      hash: md5
+      md5: e4f9fa69743e5fe52ccbe0ef34f9b4d3
+      size: 2867
+    outs:
+    - path: data/processed/movies.csv
+      hash: md5
+      md5: 90baceb801aba94f98f6053ac6ea3b1d
+      size: 807218
+    - path: data/processed/test.csv
+      hash: md5
+      md5: aceadcf090ddf757cd697b883070786e
+      size: 481762
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 2fe65480f56d28791ca5bb76b4b09b05
+      size: 1901156
+  train:
+    cmd: python -m src.pipeline.train
+    deps:
+    - path: data/processed/movies.csv
+      hash: md5
+      md5: 90baceb801aba94f98f6053ac6ea3b1d
+      size: 807218
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 2fe65480f56d28791ca5bb76b4b09b05
+      size: 1901156
+    - path: src/models/base.py
+      hash: md5
+      md5: fc896ce3b59352966bfc49eff8b05e4c
+      size: 2375
+    - path: src/models/collaborative.py
+      hash: md5
+      md5: 211c745a6181c4370248f09734737f1b
+      size: 11145
+    - path: src/pipeline/train.py
+      hash: md5
+      md5: 16f73663e838b54ee9e81493186942f3
+      size: 4681
+    params:
+      params.yaml:
+        cf.learning_rate: 0.005
+        cf.n_epochs: 20
+        cf.n_factors: 32
+        cf.regularization: 0.05
+    outs:
+    - path: models/candidates/metadata.json
+      hash: md5
+      md5: 941dfdabae23e4bde16201f8ef64f9f5
+      size: 367
+    - path: models/candidates/model.joblib
+      hash: md5
+      md5: 89f1110af53b7d12d35ac3c66fae7eed
+      size: 2719223
+  evaluate:
+    cmd: python -m src.pipeline.evaluate
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: aceadcf090ddf757cd697b883070786e
+      size: 481762
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 2fe65480f56d28791ca5bb76b4b09b05
+      size: 1901156
+    - path: models/candidates/model.joblib
+      hash: md5
+      md5: 89f1110af53b7d12d35ac3c66fae7eed
+      size: 2719223
+    - path: src/evaluation/metrics.py
+      hash: md5
+      md5: a930c617c68d144fb935330ee336ab97
+      size: 4698
+    - path: src/pipeline/evaluate.py
+      hash: md5
+      md5: 625b0522cdbd1cee58d911413c62dc71
+      size: 3366
+    outs:
+    - path: models/candidates/evaluation_report.json
+      hash: md5
+      md5: be71ecd677ca93933bca18e3b79fe2ff
+      size: 259

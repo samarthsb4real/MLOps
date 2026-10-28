@@ -1,0 +1,43 @@
+stages:
+  prepare:
+    cmd: python -m src.pipeline.prepare
+    deps:
+      - src/pipeline/prepare.py
+      - src/data/loader.py
+      - src/data/validator.py
+      - src/data/split.py
+      - ml-latest-small/ratings.csv
+      - ml-latest-small/movies.csv
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - data/processed/movies.csv
+
+  train:
+    cmd: python -m src.pipeline.train
+    deps:
+      - src/pipeline/train.py
+      - src/models/collaborative.py
+      - src/models/base.py
+      - data/processed/train.csv
+      - data/processed/movies.csv
+    params:
+      - cf.n_factors
+      - cf.n_epochs
+      - cf.learning_rate
+      - cf.regularization
+    outs:
+      - models/candidates/model.joblib
+      - models/candidates/metadata.json
+
+  evaluate:
+    cmd: python -m src.pipeline.evaluate
+    deps:
+      - src/pipeline/evaluate.py
+      - src/evaluation/metrics.py
+      - models/candidates/model.joblib
+      - data/processed/train.csv
+      - data/processed/test.csv
+    metrics:
+      - models/candidates/evaluation_report.json:
+          cache: false

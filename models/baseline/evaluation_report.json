@@ -1,0 +1,13 @@
+{
+  "model_name": "PopularityRecommender",
+  "version": "1.0.0",
+  "k": 5,
+  "relevance_threshold": 3.5,
+  "metrics": {
+    "precision@5": 0.0609,
+    "recall@5": 0.0193,
+    "ndcg@5": 0.068,
+    "catalog_coverage": 0.004,
+    "eval_user_count": 594
+  }
+}

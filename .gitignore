@@ -1,0 +1,39 @@
+# Python & Virtualenv
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+*.env
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# MLflow & Experiments
+mlruns/
+.mlflow/
+*.db
+mlflow.db
+
+# DVC
+.dvc/cache
+.dvc/tmp
+
+# Application Data & Cache
+data/raw/
+data/processed/
+data/feedback/
+models/production/
+models/candidates/
+artifacts/
+reports/
+
+# OS & Editor
+.DS_Store
+.idea/
+.vscode/
+*.swp

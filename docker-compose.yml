@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cinetrack-api
+    environment:
+      - APP_MODE=api
+      - PORT=8000
+      - MLFLOW_TRACKING_URI=sqlite:////app/mlflow.db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cinetrack-ui
+    environment:
+      - APP_MODE=ui
+      - PORT=8501
+      - API_URL=http://api:8000
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped

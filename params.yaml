@@ -1,0 +1,25 @@
+# CineTrack DVC Pipeline Parameters
+
+prepare:
+  test_ratio: 0.2
+  min_ratings_per_user: 5
+  relevance_threshold: 3.5
+
+baseline:
+  min_ratings: 20
+
+cf:
+  n_factors: 32
+  n_epochs: 20
+  learning_rate: 0.005
+  regularization: 0.05
+  random_state: 42
+
+evaluate:
+  top_k: 5
+  relevance_threshold: 3.5
+
+quality_gate:
+  min_precision: 0.08
+  min_ndcg: 0.10
+  max_ndcg_regression: 0.01
