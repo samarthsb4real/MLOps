@@ -9,6 +9,10 @@
 ![Google Cloud Run](https://img.shields.io/badge/Google_Cloud_Run-Ready-4285F4.svg)
 ![Tests](https://img.shields.io/badge/Tests-16%20Passed-brightgreen.svg)
 
+[![Live Deployment](https://img.shields.io/badge/Live_Cloud_Run-Deployed-success?style=for-the-badge&logo=googlecloud)](https://cinetrack-119150568663.us-central1.run.app)
+
+**Live Application URL**: **[https://cinetrack-119150568663.us-central1.run.app](https://cinetrack-119150568663.us-central1.run.app)**
+
 **CineTrack** is an end-to-end Machine Learning Operations (MLOps) movie recommendation system built upon the MovieLens Small dataset. It demonstrates a complete production lifecycle: from automated data validation, baseline vs collaborative filtering model training, and MLflow experiment tracking to DVC pipeline reproduction, Evidently data drift monitoring, automated retraining with quality-gated model promotion, Docker containerization, CI/CD, and Google Cloud Run deployment.
 
 ---
