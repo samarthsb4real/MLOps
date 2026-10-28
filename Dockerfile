@@ -25,11 +25,12 @@ COPY src/ ./src/
 COPY entrypoint.sh ./
 RUN chmod +x entrypoint.sh
 
+# Create runtime directories
+RUN mkdir -p data/raw data/processed data/feedback models/production models/candidates reports/drift
+
 # Copy dataset and models if present
 COPY ml-latest-small/ ./ml-latest-small/
-COPY data/ ./data/
 COPY models/ ./models/
-COPY reports/ ./reports/
 
 # Cloud Run injects $PORT (default 8080)
 EXPOSE 8080 8000 8501
