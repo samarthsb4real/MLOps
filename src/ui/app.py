@@ -3,12 +3,18 @@
 import json
 from pathlib import Path
 import sqlite3
+import sys
 from typing import Dict, List, Optional
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import streamlit as st
+
+# Ensure project root is in sys.path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.config import (
     PRODUCTION_MODEL_DIR,

@@ -5,12 +5,18 @@ from datetime import datetime, timezone
 import json
 import logging
 from pathlib import Path
+import sys
 from typing import Dict, List, Optional
 import uuid
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Query, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
+
+# Ensure project root is in sys.path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.config import (
     PRODUCTION_MODEL_DIR,
