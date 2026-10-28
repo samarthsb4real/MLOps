@@ -1,5 +1,9 @@
 # CineTrack: MLOps-Based Movie Recommendation System
 
+[![Live Cloud Run](https://img.shields.io/badge/Live_Cloud_Run-Deployed-success?style=for-the-badge&logo=googlecloud)](https://cinetrack-119150568663.us-central1.run.app)
+[![CI/CD Pipeline](https://img.shields.io/github/actions/workflow/status/samarthsb4real/MLOps/ci-cd.yml?branch=main&label=CI%2FCD&style=for-the-badge&logo=githubactions)](https://github.com/samarthsb4real/MLOps/actions)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/samarthsb4real/MLOps)
+
 ![Python Version](https://img.shields.io/badge/python-3.12-blue.svg)
 ![MLflow](https://img.shields.io/badge/MLflow-Tracking-0194E2.svg)
 ![DVC](https://img.shields.io/badge/DVC-Pipeline-945DD6.svg)
@@ -7,11 +11,17 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.40+-FF4B4B.svg)
 ![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED.svg)
 ![Google Cloud Run](https://img.shields.io/badge/Google_Cloud_Run-Ready-4285F4.svg)
-![Tests](https://img.shields.io/badge/Tests-16%20Passed-brightgreen.svg)
+![Tests](https://img.shields.io/badge/Tests-26%20Passed%20(82%25%20cov)-brightgreen.svg)
 
-[![Live Deployment](https://img.shields.io/badge/Live_Cloud_Run-Deployed-success?style=for-the-badge&logo=googlecloud)](https://cinetrack-119150568663.us-central1.run.app)
+---
 
-**Live Application URL**: **[https://cinetrack-119150568663.us-central1.run.app](https://cinetrack-119150568663.us-central1.run.app)**
+### Project Links
+- **Live Cloud Web App**: **[https://cinetrack-119150568663.us-central1.run.app](https://cinetrack-119150568663.us-central1.run.app)**
+- **GitHub Repository**: **[https://github.com/samarthsb4real/MLOps](https://github.com/samarthsb4real/MLOps)**
+- **CI/CD Automated Testing**: **[GitHub Actions](https://github.com/samarthsb4real/MLOps/actions)**
+- **GCP Cloud Run Service**: `cinetrack` (`us-central1`, Project: `affable-radio-473308-v9`)
+
+---
 
 **CineTrack** is an end-to-end Machine Learning Operations (MLOps) movie recommendation system built upon the MovieLens Small dataset. It demonstrates a complete production lifecycle: from automated data validation, baseline vs collaborative filtering model training, and MLflow experiment tracking to DVC pipeline reproduction, Evidently data drift monitoring, automated retraining with quality-gated model promotion, Docker containerization, CI/CD, and Google Cloud Run deployment.
 
@@ -210,11 +220,18 @@ docker-compose up --build
 
 ## Google Cloud Run Deployment
 
-CineTrack is fully configured for Google Cloud Run container deployment.
+CineTrack is fully containerized and deployed to **Google Cloud Run**:
+
+- **Live URL**: **[https://cinetrack-119150568663.us-central1.run.app](https://cinetrack-119150568663.us-central1.run.app)**
+- **GCP Project ID**: `affable-radio-473308-v9`
+- **Region**: `us-central1`
+- **Service Name**: `cinetrack`
+
+To deploy updates to Google Cloud Run in one command:
 
 ```bash
 # Set your GCP Project ID
-export GCP_PROJECT_ID="your-project-id"
+export GCP_PROJECT_ID="affable-radio-473308-v9"
 export GCP_REGION="us-central1"
 
 # Execute the deployment script
