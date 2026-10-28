@@ -2,6 +2,8 @@
 # CineTrack Google Cloud Run Deployment Script
 set -e
 
+export PATH="/home/samarth/google-cloud-sdk/bin:$PATH"
+
 PROJECT_ID=${GCP_PROJECT_ID:-$(gcloud config get-value project 2>/dev/null)}
 REGION=${GCP_REGION:-"us-central1"}
 SERVICE_NAME="cinetrack"
@@ -19,17 +21,13 @@ echo " Project: $PROJECT_ID | Region: $REGION | Service: $SERVICE_NAME"
 echo "============================================================"
 
 # Enable required Google Cloud services
-echo "1. Enabling required Google Cloud APIs (Cloud Run, Container Registry)..."
-gcloud services enable run.googleapis.com containerregistry.googleapis.com --project "$PROJECT_ID"
+echo "1. Enabling required Google Cloud APIs (Cloud Run, Cloud Build, Artifact Registry)..."
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com --project "$PROJECT_ID" --quiet
 
-# Build container image with Google Cloud Build
-echo "2. Building container image via Google Cloud Build..."
-gcloud builds submit --tag "$IMAGE_TAG" --project "$PROJECT_ID" .
-
-# Deploy container image to Google Cloud Run
-echo "3. Deploying service to Google Cloud Run..."
+# Deploy source directly to Google Cloud Run via Cloud Build
+echo "2. Building and deploying service to Google Cloud Run from source..."
 gcloud run deploy "$SERVICE_NAME" \
-    --image "$IMAGE_TAG" \
+    --source . \
     --platform managed \
     --region "$REGION" \
     --allow-unauthenticated \
@@ -37,7 +35,8 @@ gcloud run deploy "$SERVICE_NAME" \
     --memory 2Gi \
     --cpu 1 \
     --set-env-vars "APP_MODE=all" \
-    --project "$PROJECT_ID"
+    --project "$PROJECT_ID" \
+    --quiet
 
 SERVICE_URL=$(gcloud run services describe "$SERVICE_NAME" --platform managed --region "$REGION" --format 'value(status.url)' --project "$PROJECT_ID")
 
