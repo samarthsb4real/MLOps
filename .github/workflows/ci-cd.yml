@@ -26,6 +26,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Prepare and Validate Data
+        run: |
+          python -m src.pipeline.prepare
+
       - name: Execute Full Test Suite
         run: |
           pytest tests/ -v --cov=src --cov-report=term-missing --cov-report=xml

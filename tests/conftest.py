@@ -5,6 +5,24 @@ import pandas as pd
 import numpy as np
 
 
+from src.pipeline.prepare import prepare_data
+from src.pipeline.train import train_model
+from src.config import PROCESSED_DATA_DIR, PRODUCTION_MODEL_DIR
+
+
+@pytest.fixture(scope="session", autouse=True)
+def setup_test_environment():
+    """Ensure processed data and baseline production model exist for all test runs."""
+    if not (PROCESSED_DATA_DIR / "train.csv").exists():
+        prepare_data()
+    if not (PRODUCTION_MODEL_DIR / "model.joblib").exists():
+        train_model(
+            model_type="collaborative",
+            output_dir=PRODUCTION_MODEL_DIR,
+            params={"n_factors": 8, "n_epochs": 3},
+        )
+
+
 @pytest.fixture
 def sample_movies_df() -> pd.DataFrame:
     """Fixture providing a sample movies dataframe."""
