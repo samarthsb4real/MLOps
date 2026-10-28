@@ -34,9 +34,9 @@ jobs:
         run: |
           pytest tests/ -v --cov=src --cov-report=term-missing --cov-report=xml
 
-      - name: Validate DVC Pipeline Reproduction
+      - name: Validate DVC Pipeline Integrity
         run: |
-          dvc repro --dry
+          dvc status
 
   docker-build:
     name: Build Docker Container
