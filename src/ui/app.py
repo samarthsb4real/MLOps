@@ -248,13 +248,13 @@ if nav_selection == "Movie Explorer":
     col_search, col_genre, col_user = st.columns([2, 1.2, 1])
 
     with col_search:
-        search_query = st.text_input("🔍 Search Movies by Title", placeholder="e.g. Inception, Toy Story, Pulp Fiction...")
+        search_query = st.text_input("Search Movies by Title", placeholder="e.g. Inception, Toy Story, Pulp Fiction...")
 
     with col_genre:
-        selected_genre = st.selectbox("🎭 Filter by Genre", genre_list, index=0)
+        selected_genre = st.selectbox("Filter by Genre", genre_list, index=0)
 
     with col_user:
-        user_id_input = st.number_input("👤 Active User ID", min_value=1, max_value=610, value=1, step=1)
+        user_id_input = st.number_input("Active User ID", min_value=1, max_value=610, value=1, step=1)
 
     # Filter catalog
     filtered_movies = movies_df.copy()
@@ -269,7 +269,7 @@ if nav_selection == "Movie Explorer":
 
     st.markdown(f"**Found {len(filtered_movies):,} matching movies in catalog.**")
 
-    tab_rec, tab_browse = st.tabs(["🎯 Top Recommendations", "📚 Catalog Browser"])
+    tab_rec, tab_browse = st.tabs(["Top Recommendations", "Catalog Browser"])
 
     with tab_rec:
         st.subheader(f"Personalised Recommendations for User #{user_id_input}")
@@ -345,7 +345,7 @@ if nav_selection == "Movie Explorer":
                         )
 
             # Interactive feedback form
-            st.markdown("#### ⭐ Rate this Movie (Submit Feedback to MLOps Loop)")
+            st.markdown("#### Rate this Movie (Submit Feedback to MLOps Loop)")
             with st.form("feedback_form"):
                 fb_cols = st.columns([1.5, 1, 1])
                 with fb_cols[0]:
