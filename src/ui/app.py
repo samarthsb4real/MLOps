@@ -174,17 +174,25 @@ with st.sidebar:
     st.caption("Production MLOps Movie Recommender")
     st.markdown("---")
 
+    NAV_MOVIE_EXPLORER = "Movie Explorer"
+    NAV_MLOPS_DASHBOARD = "MLOps Dashboard"
+    NAV_RETRAINING = "Retraining & Pipeline"
+    NAV_DRIFT = "Drift & Monitoring"
+    NAV_DOCS = "Architecture & Docs"
+
     nav_selection = st.radio(
         "Navigation",
         [
-            " Movie Explorer",
-            " MLOps Dashboard",
-            " Retraining & Pipeline",
-            " Drift & Monitoring",
-            " Architecture & Docs",
+            NAV_MOVIE_EXPLORER,
+            NAV_MLOPS_DASHBOARD,
+            NAV_RETRAINING,
+            NAV_DRIFT,
+            NAV_DOCS,
         ],
         index=0,
     )
+    # Strip any potential leading/trailing whitespace for robust matching
+    nav_clean = nav_selection.strip() if isinstance(nav_selection, str) else ""
 
     st.markdown("---")
     st.subheader("System Status")
@@ -232,7 +240,7 @@ with st.sidebar:
 # -----------------------------------------------------------------------------
 # VIEW 1: MOVIE EXPLORER
 # -----------------------------------------------------------------------------
-if nav_selection == "Movie Explorer":
+if nav_clean in ("Movie Explorer", "🎬 Movie Explorer"):
     st.markdown(
         """
         <div class="hero-header">
@@ -393,7 +401,7 @@ if nav_selection == "Movie Explorer":
 # -----------------------------------------------------------------------------
 # VIEW 2: MLOPS DASHBOARD
 # -----------------------------------------------------------------------------
-elif nav_selection == "📊 MLOps Dashboard":
+elif nav_clean in ("MLOps Dashboard", "📊 MLOps Dashboard"):
     st.markdown(
         """
         <div class="hero-header">
@@ -599,7 +607,7 @@ elif nav_selection == "📊 MLOps Dashboard":
 # -----------------------------------------------------------------------------
 # VIEW 3: RETRAINING & PIPELINE
 # -----------------------------------------------------------------------------
-elif nav_selection == "Retraining & Pipeline":
+elif nav_clean in ("Retraining & Pipeline", "🔄 Retraining & Pipeline"):
     st.markdown(
         """
         <div class="hero-header">
@@ -677,7 +685,7 @@ elif nav_selection == "Retraining & Pipeline":
 # -----------------------------------------------------------------------------
 # VIEW 4: DRIFT & MONITORING
 # -----------------------------------------------------------------------------
-elif nav_selection == "📈 Drift & Monitoring":
+elif nav_clean in ("Drift & Monitoring", "📈 Drift & Monitoring"):
     st.markdown(
         """
         <div class="hero-header">
@@ -819,7 +827,7 @@ elif nav_selection == "📈 Drift & Monitoring":
 # -----------------------------------------------------------------------------
 # VIEW 5: ARCHITECTURE & DOCS
 # -----------------------------------------------------------------------------
-elif nav_selection == "Architecture & Docs":
+elif nav_clean in ("Architecture & Docs", "📖 Architecture & Docs"):
     st.markdown(
         """
         <div class="hero-header">
