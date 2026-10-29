@@ -177,11 +177,11 @@ with st.sidebar:
     nav_selection = st.radio(
         "Navigation",
         [
-            "🎬 Movie Explorer",
-            "📊 MLOps Dashboard",
-            "🔄 Retraining & Pipeline",
-            "📈 Drift & Monitoring",
-            "📖 Architecture & Docs",
+            " Movie Explorer",
+            " MLOps Dashboard",
+            " Retraining & Pipeline",
+            " Drift & Monitoring",
+            " Architecture & Docs",
         ],
         index=0,
     )
@@ -232,7 +232,7 @@ with st.sidebar:
 # -----------------------------------------------------------------------------
 # VIEW 1: MOVIE EXPLORER
 # -----------------------------------------------------------------------------
-if nav_selection == "🎬 Movie Explorer":
+if nav_selection == "Movie Explorer":
     st.markdown(
         """
         <div class="hero-header">
