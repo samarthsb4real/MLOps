@@ -1,7 +1,8 @@
 # CineTrack: MLOps-Based Movie Recommendation System
 
 [![Live Cloud Run](https://img.shields.io/badge/Live_Cloud_Run-Deployed-success?style=for-the-badge&logo=googlecloud)](https://cinetrack-119150568663.us-central1.run.app)
-[![CI/CD Pipeline](https://img.shields.io/github/actions/workflow/status/samarthsb4real/MLOps/ci-cd.yml?branch=main&label=CI%2FCD&style=for-the-badge&logo=githubactions)](https://github.com/samarthsb4real/MLOps/actions)
+[![CI Pipeline](https://img.shields.io/github/actions/workflow/status/samarthsb4real/MLOps/ci.yml?branch=main&label=CI&style=for-the-badge&logo=githubactions)](https://github.com/samarthsb4real/MLOps/actions/workflows/ci.yml)
+[![CD Pipeline](https://img.shields.io/github/actions/workflow/status/samarthsb4real/MLOps/cd.yml?branch=main&label=CD&style=for-the-badge&logo=googlecloud)](https://github.com/samarthsb4real/MLOps/actions/workflows/cd.yml)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/samarthsb4real/MLOps)
 
 ![Python Version](https://img.shields.io/badge/python-3.12-blue.svg)

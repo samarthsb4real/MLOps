@@ -106,3 +106,30 @@ Before any candidate model can be promoted to `models/production/`, it must pass
 | **Collaborative Filtering (SVD)** | 0.0337 | 0.0100 | 0.0336 | 0.0082 (0.8%) | ~2 ms |
 
 *Observation*: While the Popularity baseline yields high precision on blockbuster movies (Shawshank Redemption, Pulp Fiction) that dominate global watchlists, Collaborative Filtering doubles catalog diversity and generates personalized recommendations based on latent genre taste.
+
+---
+
+## 5. CI/CD Architecture
+
+The system decouples **Continuous Integration (CI)** from **Continuous Deployment (CD)** across dedicated workflows in `.github/workflows/`:
+
+- **CI Workflow (`ci.yml`)**:
+  - **Triggers**: Pull requests and direct pushes to `main` / `master`, plus manual triggers.
+  - **Responsibilities**:
+    1. Python 3.12 environment setup & dependency caching.
+    2. Data schema and referential integrity validation (`src.pipeline.prepare`).
+    3. Automated test suite execution with pytest and coverage reporting.
+    4. DVC pipeline state & hash integrity verification (`dvc status`).
+    5. Docker container build validation.
+  - **Security**: Runs in unprivileged context without exposing deployment credentials to untrusted PR branches.
+
+- **CD Workflow (`cd.yml`)**:
+  - **Triggers**: Successful completion of `CineTrack CI` on `main`/`master` via `workflow_run`, plus manual deployment via `workflow_dispatch`.
+  - **Responsibilities**:
+    1. Verifies that the CI pipeline concluded with `success`.
+    2. Authenticates to Google Cloud using repository secrets (`GCP_SA_KEY`).
+    3. Configures Docker authentication for Google Artifact Registry.
+    4. Builds and pushes tagged container images (`${{ github.sha }}` and `latest`).
+    5. Deploys updated container revision to Google Cloud Run with zero downtime.
+  - **Resilience**: Decoupled design allows independent re-deployment without re-running long test matrices.
+
