@@ -479,7 +479,7 @@ elif nav_selection == "📊 MLOps Dashboard":
             f"""
             <div style="background:#161b22; border:1px solid #30363d; border-radius:12px; padding:20px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="color:#3fb950; margin:0;">🟢 Production Incumbent</h3>
+                    <h3 style="color:#3fb950; margin:0;"> Production Incumbent</h3>
                     <span class="badge badge-promoted">ACTIVE DEPLOYMENT</span>
                 </div>
                 <p style="margin:12px 0 4px 0; color:#f0f6fc;"><strong>Architecture:</strong> {prod_meta.get('model_name', 'CollaborativeFilteringSVD')}</p>
@@ -503,7 +503,7 @@ elif nav_selection == "📊 MLOps Dashboard":
             f"""
             <div style="background:#161b22; border:1px solid #30363d; border-radius:12px; padding:20px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <h3 style="color:#58a6ff; margin:0;">🔵 Candidate Staging</h3>
+                    <h3 style="color:#58a6ff; margin:0;"> Candidate Staging</h3>
                     <span class="badge badge-genre">QUALITY GATE STAGE</span>
                 </div>
                 <p style="margin:12px 0 4px 0; color:#f0f6fc;"><strong>Architecture:</strong> {cand_meta.get('model_name', 'CollaborativeFilteringSVD')}</p>
@@ -519,7 +519,7 @@ elif nav_selection == "📊 MLOps Dashboard":
     st.markdown("---")
 
     # 3. Quality Gate History
-    st.subheader("🛡️ Automated Quality Gate Decision Audit Log")
+    st.subheader("Automated Quality Gate Decision Audit Log")
     hist_file = PRODUCTION_MODEL_DIR / "promotion_history.json"
     rejection_file = CANDIDATE_MODEL_DIR / "rejection_history.json"
 
@@ -599,11 +599,11 @@ elif nav_selection == "📊 MLOps Dashboard":
 # -----------------------------------------------------------------------------
 # VIEW 3: RETRAINING & PIPELINE
 # -----------------------------------------------------------------------------
-elif nav_selection == "🔄 Retraining & Pipeline":
+elif nav_selection == "Retraining & Pipeline":
     st.markdown(
         """
         <div class="hero-header">
-            <h1 style="margin:0; font-size:2.2rem; font-weight:800; color:#58a6ff;">🔄 Automated Retraining & Quality Gate</h1>
+            <h1 style="margin:0; font-size:2.2rem; font-weight:800; color:#58a6ff;"> Automated Retraining & Quality Gate</h1>
             <p style="margin:8px 0 0 0; color:#8b949e; font-size:1.05rem;">
                 Train new candidate models, compare against incumbent baseline, and evaluate automated quality gate promotion.
             </p>
@@ -667,8 +667,8 @@ elif nav_selection == "🔄 Retraining & Pipeline":
                 st.cache_resource.clear()
                 if gate_decision["passed"]:
                     st.balloons()
-                    st.info("💡 Model successfully promoted to `models/production/`! Click below or switch tabs to refresh the active serving instance.")
-                    if st.button("🔄 Refresh UI to Active Production Model", key="refresh_after_retrain"):
+                    st.info("Model successfully promoted to `models/production/`! Click below or switch tabs to refresh the active serving instance.")
+                    if st.button("Refresh UI to Active Production Model", key="refresh_after_retrain"):
                         st.rerun()
             except Exception as e:
                 st.error(f"Retraining encountered an error: {e}")
@@ -806,7 +806,7 @@ elif nav_selection == "📈 Drift & Monitoring":
 
     # Embedded Evidently HTML Report
     st.markdown("---")
-    st.subheader("📑 Interactive Evidently AI Drift Report")
+    st.subheader("Interactive Evidently AI Drift Report")
     html_report_path = DRIFT_REPORTS_DIR / "drift_report.html"
     if html_report_path.exists():
         with open(html_report_path, "r", encoding="utf-8") as f:
@@ -819,11 +819,11 @@ elif nav_selection == "📈 Drift & Monitoring":
 # -----------------------------------------------------------------------------
 # VIEW 5: ARCHITECTURE & DOCS
 # -----------------------------------------------------------------------------
-elif nav_selection == "📖 Architecture & Docs":
+elif nav_selection == "Architecture & Docs":
     st.markdown(
         """
         <div class="hero-header">
-            <h1 style="margin:0; font-size:2.2rem; font-weight:800; color:#58a6ff;">📖 CineTrack Architecture & Reproduction</h1>
+            <h1 style="margin:0; font-size:2.2rem; font-weight:800; color:#58a6ff;"> CineTrack Architecture & Reproduction</h1>
             <p style="margin:8px 0 0 0; color:#8b949e; font-size:1.05rem;">
                 System design, MLOps workflow, quality gate criteria, and Cloud Run deployment guide.
             </p>
