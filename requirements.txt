@@ -186,7 +186,7 @@ ujson==6.0.0
 urllib3==2.8.0
 uuid6==2025.0.1
 uvicorn==0.54.0
-uvloop==0.23.0
+uvloop==0.23.0; sys_platform != 'win32'
 vine==5.1.0
 voluptuous==0.16.0
 watchdog==6.0.0

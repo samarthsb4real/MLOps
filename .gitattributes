@@ -1,0 +1,6 @@
+# Enforce LF endings on shell scripts to prevent /bin/sh^M errors in Linux Docker containers when cloned on Windows
+*.sh text eol=lf
+Dockerfile text eol=lf
+*.py text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
