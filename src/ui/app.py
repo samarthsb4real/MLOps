@@ -188,9 +188,35 @@ with st.sidebar:
 
     st.markdown("---")
     st.subheader("System Status")
+    
+    prod_meta_path = PRODUCTION_MODEL_DIR / "metadata.json"
+    prod_meta = {}
+    if prod_meta_path.exists():
+        try:
+            with open(prod_meta_path, "r") as f:
+                prod_meta = json.load(f)
+        except Exception:
+            pass
+
     if prod_model:
         st.success(f"Production: **{prod_model.model_name}**")
-        st.caption(f"Version: `{prod_model.version}`")
+        run_id_val = str(prod_meta.get("run_id", "bootstrap"))
+        run_id_short = run_id_val[:8] if run_id_val else "bootstrap"
+        st.caption(f"Status: `ACTIVE (models/production/)`")
+        st.caption(f"Run ID: `{run_id_short}` | Dim: `{prod_meta.get('n_factors', 32)}k`")
+        
+        # Check last promotion timestamp
+        history_path = PRODUCTION_MODEL_DIR / "promotion_history.json"
+        if history_path.exists():
+            try:
+                with open(history_path, "r") as f:
+                    history = json.load(f)
+                    if history:
+                        last_event = history[-1]
+                        last_ts = str(last_event.get("timestamp", ""))[:19].replace("T", " ")
+                        st.caption(f"Promoted: `{last_ts} UTC`")
+            except Exception:
+                pass
     else:
         st.warning("Production Model: Initializing...")
 
@@ -639,6 +665,11 @@ elif nav_selection == "🔄 Retraining & Pipeline":
                 )
 
                 st.cache_resource.clear()
+                if gate_decision["passed"]:
+                    st.balloons()
+                    st.info("💡 Model successfully promoted to `models/production/`! Click below or switch tabs to refresh the active serving instance.")
+                    if st.button("🔄 Refresh UI to Active Production Model", key="refresh_after_retrain"):
+                        st.rerun()
             except Exception as e:
                 st.error(f"Retraining encountered an error: {e}")
 
